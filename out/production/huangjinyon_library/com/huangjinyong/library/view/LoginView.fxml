@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="692.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.huangjinyong.library.controller.LoginController">
+   <children>
+      <VBox fx:id="registBox" alignment="BOTTOM_CENTER" layoutX="100.0" layoutY="89.0" prefHeight="231.0" prefWidth="542.0" spacing="15.0" visible="false">
+         <children>
+            <Button mnemonicParsing="false" onAction="#toLogin" text="已有账号?前往登录">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Button>
+            <GridPane hgap="15.0" prefHeight="150.0" prefWidth="261.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="138.0" minWidth="10.0" prefWidth="138.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="245.0" minWidth="0.0" prefWidth="242.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="362.0" minWidth="10.0" prefWidth="132.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="用户名" />
+                  <Label text="密码" GridPane.rowIndex="1" />
+                  <Label text="真实姓名" GridPane.rowIndex="2" />
+                  <TextField fx:id="registUsername" prefHeight="30.0" prefWidth="170.0" GridPane.columnIndex="1" />
+                  <TextField fx:id="registTrueName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <PasswordField fx:id="registPassword" prefHeight="30.0" prefWidth="204.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="usernameError" prefHeight="20.0" prefWidth="289.0" textFill="#eb1919" GridPane.columnIndex="2" />
+                  <Label fx:id="passwordError" prefHeight="20.0" prefWidth="227.0" textFill="#e81010" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#regist" text="注册" />
+
+         </children>
+      </VBox>
+      <VBox fx:id="loginBox" layoutX="176.0" layoutY="49.0" prefHeight="352.0" prefWidth="325.0" spacing="15.0" visible="true">
+         <children>
+            <Label prefHeight="20.0" prefWidth="227.0" text="图书馆预约系统登录">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+            </Label>
+            <Button fx:id="toRegist" mnemonicParsing="false" onAction="#toRegist" text="注册" />
+            <GridPane alignment="CENTER" prefHeight="238.0" prefWidth="291.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="158.0" minWidth="10.0" prefWidth="90.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="10.0" prefWidth="235.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="用户名" />
+                  <Label text="密码" GridPane.rowIndex="1" />
+                  <CheckBox fx:id="isAdmin" mnemonicParsing="false" text="管理员" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#login" text="登录" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="loginUsername" GridPane.columnIndex="1" />
+                  <PasswordField fx:id="loginPassword" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+            <Label fx:id="loginError" alignment="CENTER" textFill="#e11212" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
