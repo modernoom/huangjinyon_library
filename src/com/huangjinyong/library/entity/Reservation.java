@@ -15,22 +15,58 @@ public class Reservation {
     private IntegerProperty seatId=new SimpleIntegerProperty();
     private IntegerProperty studentId=new SimpleIntegerProperty();
     private IntegerProperty status=new SimpleIntegerProperty();
-    private Date orderTime;
-    private IntegerProperty isComment=new SimpleIntegerProperty();
     private IntegerProperty isScore=new SimpleIntegerProperty();
-    private StringProperty statusString=new SimpleStringProperty();
+    private IntegerProperty isFinish=new SimpleIntegerProperty();
 
-    public String getStatusString() {
-        return statusString.get();
+    public int getIsFinish() {
+        return isFinish.get();
     }
 
-    public StringProperty statusStringProperty() {
-        return statusString;
+    public IntegerProperty isFinishProperty() {
+        return isFinish;
     }
 
-    public void setStatusString(String statusString) {
-        this.statusString.set(statusString);
+    public void setIsFinish(Integer isFinish) {
+        this.isFinish.set(isFinish);
     }
+
+    private Date orderDate;
+    private IntegerProperty timeFrom=new SimpleIntegerProperty();
+
+    public int getTimeTo() {
+        return timeTo.get();
+    }
+
+    public IntegerProperty timeToProperty() {
+        return timeTo;
+    }
+
+    public void setTimeTo(Integer timeTo) {
+        this.timeTo.set(timeTo);
+    }
+
+    public int getTimeFrom() {
+        return timeFrom.get();
+    }
+
+    public IntegerProperty timeFromProperty() {
+        return timeFrom;
+    }
+
+    public void setTimeFrom(Integer timeFrom) {
+        this.timeFrom.set(timeFrom);
+    }
+
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    private IntegerProperty timeTo=new SimpleIntegerProperty();
+    private Date orderTime;
 
     public int getId() {
         return id.get();
@@ -79,10 +115,6 @@ public class Reservation {
 
     public void setStatus(Integer status) {
         this.status.set(status);
-        if(status==1){
-            setStatusString("已完成");
-        }
-        setStatusString("进行中");
     }
 
     public Date getOrderTime() {
@@ -91,18 +123,6 @@ public class Reservation {
 
     public void setOrderTime(Date orderTime) {
         this.orderTime = orderTime;
-    }
-
-    public int getIsComment() {
-        return isComment.get();
-    }
-
-    public IntegerProperty isCommentProperty() {
-        return isComment;
-    }
-
-    public void setIsComment(Integer isComment) {
-        this.isComment.set(isComment);
     }
 
     public int getIsScore() {

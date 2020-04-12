@@ -5,20 +5,35 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * @author huangjinyong
+ */
 public class Student implements User {
     private IntegerProperty id=new SimpleIntegerProperty();
     private StringProperty username=new SimpleStringProperty();
     private StringProperty password=new SimpleStringProperty();
     private StringProperty trueName=new SimpleStringProperty();
     private IntegerProperty status=new SimpleIntegerProperty();
+    private StringProperty statusString=new SimpleStringProperty();
 
-    public Student(String username, String password, String trueName) {
+    public String getStatusString() {
+        return statusString.get();
+    }
+
+    public StringProperty statusStringProperty() {
+        return statusString;
+    }
+
+    public void setStatusString(String statusString) {
+        this.statusString.set(statusString);
+    }
+
+    public Student(){}
+    public Student(String username,String passwod,String trueName){
         setUsername(username);
-        setPassword(password);
+        setPassword(passwod);
         setTrueName(trueName);
     }
-    public Student(){}
-
 
     public int getId() {
         return id.get();
@@ -78,6 +93,12 @@ public class Student implements User {
 
     public void setStatus(Integer status) {
         this.status.set(status);
+        if(status==1){
+            setStatusString("正常");
+        }
+        if(status==0){
+            setStatusString("被拉黑");
+        }
     }
 
     @Override

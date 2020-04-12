@@ -6,12 +6,13 @@ import com.huangjinyong.library.util.jdbchelper.core.JdbcHelper;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author huangjinyong
  */
 public class ReservationDaoImpl implements ReservationDao {
-    JdbcHelper jdbcHelper=new JdbcHelper();
+    private JdbcHelper jdbcHelper=new JdbcHelper();
 
     @Override
     public List<Reservation> findAll(Map<String,?> map) {
@@ -20,7 +21,26 @@ public class ReservationDaoImpl implements ReservationDao {
     }
 
     @Override
+    public List<Reservation> findAll(Map<String, ?> map, Map<String, Boolean> order) {
+        String sql="select * from reservation";
+        return jdbcHelper.queryByCondition(sql,Reservation.class,map,order);
+    }
+
+    @Override
     public void save(Reservation reservation) {
-        jdbcHelper.update("insert into reservation(seat_id,student_id) values (?,?)",reservation.getSeatId(),reservation.getStudentId());
+        String sql="insert into reservation(seat_id,student_id,order_date,time_from,time_to,order_time) values (?,?,?,?,?,?)";
+        jdbcHelper.update(sql,reservation.getSeatId(),reservation.getStudentId(),reservation.getOrderDate(),
+                              reservation.getTimeFrom(),reservation.getTimeTo(),reservation.getOrderTime());
+
+    }
+
+    @Override
+    public void updateStatus(Reservation reservation) {
+        jdbcHelper.update("update reservation set status=?, is_score=? where id=?",reservation.getStatus(),reservation.getIsScore(),reservation.getId());
+    }
+
+    @Override
+    public void updateFinish(Reservation reservation) {
+        jdbcHelper.update("update reservation set is_finish=? where id=?",reservation.getIsFinish(),reservation.getId());
     }
 }

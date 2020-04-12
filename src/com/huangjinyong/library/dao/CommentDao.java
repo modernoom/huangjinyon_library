@@ -15,4 +15,10 @@ public interface CommentDao {
      * @return 评论
      */
     List<Comment> findAll(Map<String,?> map);
+
+    /**
+     * 保存
+     * @param comment 评论
+     */
+    void save(Comment comment);
 }

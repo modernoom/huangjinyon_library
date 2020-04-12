@@ -17,7 +17,6 @@ public class Main extends Application {
     private User loginUser;
     private Stage primaryStage;
 
-
     public User getLoginUser() {
         return loginUser;
     }
@@ -38,10 +37,10 @@ public class Main extends Application {
         //load login page
         FXMLLoader fxmlLoader = new FXMLLoader();
         AnchorPane anchorPane = fxmlLoader.load(Main.class.getClassLoader().getResourceAsStream("com/huangjinyong/library/view/LoginView.fxml"));
-        primaryStage.setScene(new Scene(anchorPane));
         //set Main to login page
         LoginController loginController =fxmlLoader.getController();
         loginController.setMain(this);
+        primaryStage.setScene(new Scene(anchorPane));
         //show stage
         primaryStage.show();
     }

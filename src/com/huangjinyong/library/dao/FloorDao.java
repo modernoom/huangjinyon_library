@@ -19,4 +19,24 @@ public interface FloorDao {
      * @return floor
      */
     List<Floor> findAll(Integer libraryId);
+
+    /**
+     * id 查询
+     * @param id id
+     * @return floor
+     */
+    Floor findById(Integer id);
+
+    /**
+     * 保存
+     * @param floor 楼层
+     */
+    void save(Floor floor);
+
+    /**
+     * 删除
+     * @param id id
+     * @return
+     */
+    int delete(Integer id);
 }

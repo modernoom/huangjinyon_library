@@ -8,7 +8,6 @@ import javafx.beans.property.*;
 public class Library {
     private IntegerProperty id=new SimpleIntegerProperty();
     private StringProperty name=new SimpleStringProperty();
-    private DoubleProperty score=new SimpleDoubleProperty();
 
     public int getId() {
         return id.get();
@@ -34,17 +33,7 @@ public class Library {
         this.name.set(name);
     }
 
-    public double getScore() {
-        return score.get();
-    }
 
-    public DoubleProperty scoreProperty() {
-        return score;
-    }
-
-    public void setScore(Double score) {
-        this.score.set(score);
-    }
 
     @Override
     public String toString() {

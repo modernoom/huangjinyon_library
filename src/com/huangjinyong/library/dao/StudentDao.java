@@ -26,9 +26,27 @@ public interface StudentDao {
 
     /**
      * 返回所有记录
-     * @return s所有记录
+     * @return 所有记录
      */
     List<Student> findAll();
 
+    /**
+     * 查找 与用户关联的最新订单的状态
+     * @param stuId 用户id
+     * @return 状态 1：未结束 0：已结束
+     */
+    Integer findReservationStatus(Integer stuId);
 
+    /**
+     * 更新用户状态
+     * @param student 用户
+     * @return 影响的行数
+     */
+    int updateStatus(Student student);
+
+    /**
+     * id 查询
+     * @param id
+     */
+    Student findById(Integer id);
 }

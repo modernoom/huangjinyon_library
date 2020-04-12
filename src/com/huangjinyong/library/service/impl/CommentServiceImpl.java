@@ -25,4 +25,9 @@ public class CommentServiceImpl implements CommentService {
     public List<Comment> findByCondition(Map map) {
         return dao.findAll(map);
     }
+
+    @Override
+    public void save(Comment comment) {
+        dao.save(comment);
+    }
 }

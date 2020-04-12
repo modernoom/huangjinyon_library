@@ -12,6 +12,12 @@ import java.util.Map;
  */
 public interface SeatService {
     /**
+     * 条件查询
+     * @param condition 条件map
+     * @return seat
+     */
+    List<Seat> findByCondition(Map<String,?>condition);
+    /**
      * 分页
      * @param currentPage 当前页
      * @param pageSize 页大小
@@ -34,10 +40,63 @@ public interface SeatService {
     List<SeatType> findAllType();
 
     /**
-     * 查找座位的类型
-     * @param condition 条件
-     * @return types
+     * id 查询
+     * @param seatTypeId id
+     * @return 座位类型
      */
-    List<SeatType> findAllType(Map<String,?>condition);
+    SeatType findTypeById(Integer seatTypeId);
+    /**
+     * 更新
+     * @param currentSeat 椅子
+     */
+    void update(Seat currentSeat);
 
+    /**
+     * id 查询
+     * @param seatId id
+     * @return seat
+     */
+    Seat findById(int seatId);
+
+    /**
+     * 更新椅子状态
+     * @param seat 椅子
+     */
+    void updateStatus(Seat seat);
+
+    /**
+     * 计算比更新座位评分
+     * @param reservationSeat
+     * @param comfortScore
+     * @param affectScore
+     */
+    void updateScore(Seat reservationSeat, Integer comfortScore, Integer affectScore);
+
+    /**
+     * 保存座位
+     * @param seat 座位
+     */
+    void save(Seat seat);
+
+    /**
+     * 移除
+     * @param id id
+     * @return 是否成功
+     */
+    boolean delete(int id);
+
+    /**
+     * 更新图片
+     * @param id id
+     * @param imgName 图片名称
+     * @return
+     */
+    boolean updateImg(int id, String imgName);
+
+    /**
+     * 保存 类型
+     * @param typeName 座位类型
+     * @return 是否成功 存在同名类型 返回失败
+     */
+    boolean saveType(String typeName);
 }

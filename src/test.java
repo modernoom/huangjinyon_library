@@ -2,20 +2,24 @@ import com.huangjinyong.library.Main;
 import com.huangjinyong.library.controller.LoginController;
 import com.huangjinyong.library.dao.AdminDao;
 import com.huangjinyong.library.dao.impl.AdminDaoImpl;
-import com.huangjinyong.library.entity.Admin;
-import com.huangjinyong.library.entity.Comment;
-import com.huangjinyong.library.entity.Student;
-import com.huangjinyong.library.entity.User;
+import com.huangjinyong.library.entity.*;
 import com.huangjinyong.library.util.jdbchelper.core.ConditionSqlCreator;
 import com.huangjinyong.library.util.jdbchelper.core.JdbcHelper;
 import com.huangjinyong.library.util.jdbchelper.page.PageBean;
 import com.huangjinyong.library.util.jdbchelper.page.PageHelper;
 import com.huangjinyong.library.util.jdbchelper.page.Support;
 import com.huangjinyong.library.util.other.Check;
+import com.huangjinyong.library.util.other.ImageUp;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -74,8 +78,35 @@ public class test {
       } catch (ParseException e) {
          System.out.println("错啦");
       }
+   }
 
+   @Test
+   public void test7(){
+      Map stringMap = new HashMap(2);
+      stringMap.put("library_id",1);
+      Map stringMap2 = new HashMap();
+      stringMap2.put("seat_type_id",true);
+      List list = jdbcHelper.queryByCondition("select * from seat", Seat.class, stringMap, stringMap2);
+      System.out.println(list);
+   }
+
+   @Test
+   public void test8() throws ClassNotFoundException, SQLException {
+      Integer integer = jdbcHelper.queryAsObject("select status from reservation where order_time=(select max(order_time) from reservation )", Integer.class);
+      System.out.println(integer);
 
    }
+
+@Test
+public void test(){
+
+   try {
+      String upload = ImageUp.upload("D:/default.jpg");
+   } catch (IOException e) {
+      System.out.println("错误");
+   }
+}
+
+
 }
 

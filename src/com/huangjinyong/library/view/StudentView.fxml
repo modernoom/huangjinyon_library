@@ -10,6 +10,7 @@
 <?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -222,7 +223,7 @@
          </children>
       </AnchorPane>
 
-               <HBox alignment="CENTER_LEFT" layoutX="1.0" prefHeight="53.0" prefWidth="1208.0">
+               <HBox alignment="CENTER_LEFT" layoutX="-25.0" prefHeight="53.0" prefWidth="1208.0">
          <children>
             <Label fx:id="showStudentName" prefHeight="25.0" prefWidth="176.0" textFill="#42ae17">
                <HBox.margin>
@@ -240,7 +241,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label onMouseClicked="#lookOrder" prefHeight="23.0" prefWidth="170.0" text="预定记录" textFill="#e80d0d">
+            <Label onMouseClicked="#lookOrder" prefHeight="23.0" prefWidth="170.0" text="我的预约" textFill="#e80d0d">
                <font>
                   <Font size="17.0" />
                </font>
@@ -262,10 +263,85 @@
             </Label>
          </children>
       </HBox>
-      <AnchorPane fx:id="reservationScene" layoutX="57.0" layoutY="66.0" prefHeight="505.0" prefWidth="1054.0" visible="false">
-         <children>
-            <Pagination fx:id="reservationPage" prefHeight="508.0" prefWidth="450.0" />
-         </children>
+      <AnchorPane fx:id="reservationScene" layoutX="-1.0" layoutY="46.0" prefHeight="585.0" prefWidth="1208.0" visible="false">
+         <AnchorPane fx:id="showCurrentReservation" layoutX="145.0" layoutY="51.0" prefHeight="479.0" prefWidth="684.0">
+            <children>
+               <Label layoutX="375.0" layoutY="33.0" text="当前预约">
+                  <font>
+                     <Font size="24.0" />
+                  </font>
+               </Label>
+               <Label layoutX="497.0" layoutY="87.0" text="座位信息" />
+               <Label layoutX="122.0" layoutY="144.0" text="预约日期" />
+               <Label fx:id="currentReservationDate" layoutX="201.0" layoutY="144.0" />
+               <Label layoutX="122.0" layoutY="182.0" text="预约时段" />
+               <Label fx:id="currentReservationTimeFrom" layoutX="205.0" layoutY="182.0" prefHeight="20.0" prefWidth="23.0" />
+               <Label layoutX="228.0" layoutY="182.0" text="到" />
+               <Label fx:id="currentReservationTimeTo" layoutX="249.0" layoutY="182.0" />
+               <Label layoutX="276.0" layoutY="182.0" text="时" />
+               <Separator layoutX="120.0" layoutY="171.0" prefHeight="3.0" prefWidth="171.0" />
+               <Separator layoutX="114.0" layoutY="67.0" orientation="VERTICAL" prefHeight="340.0" prefWidth="6.0" />
+               <Separator layoutX="118.0" layoutY="66.0" prefHeight="3.0" prefWidth="599.0" />
+               <Separator layoutX="300.0" layoutY="64.0" orientation="VERTICAL" prefHeight="340.0" prefWidth="6.0" />
+               <Label layoutX="321.0" layoutY="192.0" text="座位编号" />
+               <Label fx:id="currentReservationSeatId" layoutX="442.0" layoutY="192.0" />
+               <Label layoutX="321.0" layoutY="243.0" text="座位类别" />
+               <Label fx:id="currentReservationSeatType" layoutX="423.0" layoutY="243.0" />
+               <Label layoutX="314.0" layoutY="289.0" text="所属图书馆" />
+               <Label fx:id="currentReservationLibName" layoutX="432.0" layoutY="289.0" />
+               <Label layoutX="332.0" layoutY="336.0" text="楼层" />
+               <Label fx:id="currentReservationFloorName" layoutX="432.0" layoutY="336.0" />
+               <Separator layoutX="714.0" layoutY="64.0" orientation="VERTICAL" prefHeight="340.0" prefWidth="6.0" />
+               <Separator layoutX="117.0" layoutY="406.0" prefHeight="3.0" prefWidth="599.0" />
+               <Button fx:id="finishButton" layoutX="383.0" layoutY="444.0" mnemonicParsing="false" text="完成预约" />
+               <Label layoutX="374.0" layoutY="419.0" text="座位使用完毕?" />
+               <Button fx:id="cancelButton" layoutX="218.0" layoutY="444.0" mnemonicParsing="false" text="取消预约" />
+               <ImageView fx:id="currentReservationImage" fitHeight="123.0" fitWidth="165.0" layoutX="303.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true" />
+            </children>
+         </AnchorPane>
+         <Label fx:id="showNoReservation" text="当前暂无预约" textFill="#14b3c4" visible="false">
+            <font>
+               <Font size="66.0" />
+            </font>
+         </Label>
+         <AnchorPane fx:id="showFinishScene" prefHeight="368.0" prefWidth="745.0" visible="false">
+            <children>
+               <Label layoutX="328.0" layoutY="4.0" prefHeight="25.0" prefWidth="96.0" text="感谢您的使用" />
+               <Label layoutX="298.0" layoutY="29.0" text="请对这次体验作出评价" />
+               <Label layoutX="261.0" layoutY="71.0" text="舒适度" />
+               <Label layoutX="254.0" layoutY="118.0" text="学习效率" />
+               <ChoiceBox fx:id="comfortChoice" layoutX="361.0" layoutY="66.0" prefHeight="30.0" prefWidth="72.0">
+                  <items>
+                     <FXCollections fx:factory="observableArrayList">
+                       <Integer fx:value="0" />
+                       <Integer fx:value="1" />
+                       <Integer fx:value="2" />
+                       <Integer fx:value="3" />
+                       <Integer fx:value="4" />
+                       <Integer fx:value="5" />
+                     </FXCollections>
+                  </items>
+               </ChoiceBox>
+               <ChoiceBox fx:id="affectChoice" layoutX="361.0" layoutY="113.0" prefHeight="30.0" prefWidth="72.0">
+                  <items>
+                     <FXCollections fx:factory="observableArrayList">
+                     <Integer fx:value="0" />
+                     <Integer fx:value="1" />
+                     <Integer fx:value="2" />
+                     <Integer fx:value="3" />
+                     <Integer fx:value="4" />
+                     <Integer fx:value="5" />
+                     </FXCollections>
+                  </items>
+               </ChoiceBox>
+               <TextArea fx:id="commentField" layoutX="119.0" layoutY="183.0" prefHeight="123.0" prefWidth="545.0" />
+               <Label layoutX="279.0" layoutY="163.0" text="你可以在这里留下你的评论哦" />
+               <Button fx:id="submitEvaluation" layoutX="327.0" layoutY="324.0" mnemonicParsing="false" text="提交" />
+               <Label layoutX="455.0" layoutY="71.0" text="必填" />
+               <Label layoutX="459.0" layoutY="118.0" text="必填" />
+               <Label fx:id="evaluationError" layoutX="537.0" layoutY="103.0" text="您必需作出评分" textFill="#e80909" />
+            </children>
+         </AnchorPane>
       </AnchorPane>
    </children>
 </AnchorPane>

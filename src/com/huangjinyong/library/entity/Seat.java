@@ -20,6 +20,19 @@ public class Seat {
     private IntegerProperty timeTo=new SimpleIntegerProperty();
     private StringProperty type=new SimpleStringProperty();
     private IntegerProperty seatTypeId=new SimpleIntegerProperty();
+    private IntegerProperty scoreNum=new SimpleIntegerProperty();
+
+    public int getScoreNum() {
+        return scoreNum.get();
+    }
+
+    public IntegerProperty scoreNumProperty() {
+        return scoreNum;
+    }
+
+    public void setScoreNum(Integer scoreNum) {
+        this.scoreNum.set(scoreNum);
+    }
 
     public Integer getSeatTypeId() {
         return seatTypeId.get();

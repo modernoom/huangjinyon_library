@@ -37,4 +37,25 @@ public class StudentDaoImpl implements StudentDao {
         String sql="select * from student";
         return jdbcHelper.query(sql,Student.class);
     }
+
+    @Override
+    public Integer findReservationStatus(Integer stuId) {
+        String sql="select status from reservation where student_id=? and order_time=(select max(order_time) from reservation)";
+        return jdbcHelper.queryAsObject(sql,Integer.class,stuId);
+    }
+
+    @Override
+    public int updateStatus(Student student) {
+        return jdbcHelper.update("update student set status=? where id=?",student.getStatus(),student.getId());
+    }
+
+    @Override
+    public Student findById(Integer id) {
+        List<Student> students = jdbcHelper.query("select * from student where id=?", Student.class, id);
+        if(students.size()==1){
+            return students.get(0);
+        }
+        return null;
+    }
+
 }

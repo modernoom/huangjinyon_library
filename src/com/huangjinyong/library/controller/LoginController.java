@@ -122,36 +122,49 @@ public class LoginController {
      */
     @FXML
     private void login() {
+        loginError.setText("");
         String username=loginUsername.getText();
         String password=loginPassword.getText();
         User user;
         if(isAdmin.isSelected()){
             user=adminService.login(username,password);
-            if(user!=null){
-                main.setLoginUser(user);
-
+            if(user==null){
+                loginError.setText("用户名或密码错误");
+                return;
+            }
+            //设置当前登录的用户
+            main.setLoginUser(user);
+            //加载管理员页面
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getClassLoader().getResource("com/huangjinyong/library/view/AdminView.fxml"));
+            try {
+                AnchorPane anchorPane=fxmlLoader.load();
+                AdminController controller=fxmlLoader.getController();
+                controller.setMain(main);
+                main.getPrimaryStage().setScene(new Scene(anchorPane));
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }else{
             user=studentService.login(username,password);
-            if(user!=null){
-                main.setLoginUser(user);
-                FXMLLoader fx=new FXMLLoader(Main.class.getClassLoader().getResource("com/huangjinyong/library/view/StudentView.fxml"));
-                try {
-                    AnchorPane pane = fx.load();
-                    StudentController controller = fx.getController();
-                    controller.setMain(main);
-                    main.getPrimaryStage().setScene(new Scene(pane));
-                } catch (IOException e) {
-                    System.out.println(e);
-                    e.printStackTrace();
-                }
+            if(user==null){
+                loginError.setText("用户名或密码错误");
+                return;
+            }
+            //设置当前登录的用户
+            main.setLoginUser(user);
+            //加载用户页面
+            FXMLLoader fx=new FXMLLoader(Main.class.getClassLoader().getResource("com/huangjinyong/library/view/StudentView.fxml"));
+            try {
+                AnchorPane pane = fx.load();
+                StudentController controller = fx.getController();
+                controller.setMain(main);
+                main.getPrimaryStage().setScene(new Scene(pane));
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
-        if(user==null){
-            loginError.setText("用户名或密码错误");
-            return;
-        }
-        loginError.setText("");
+
+
     }
 
     public void setMain(Main main){

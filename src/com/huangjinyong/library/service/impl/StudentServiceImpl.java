@@ -41,4 +41,25 @@ public class StudentServiceImpl implements StudentService {
 
         return page;
     }
+
+    @Override
+    public boolean haveUnDone(Student student) {
+        Integer  status = studentDao.findReservationStatus(student.getId());
+        if(status==null||status==0){
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean updateStatus(Student student) {
+        Student byId = studentDao.findById(student.getId());
+        if(byId.getStatus()==student.getStatus()){
+            return false;
+        }
+        studentDao.updateStatus(student);
+        return true;
+    }
+
+
 }

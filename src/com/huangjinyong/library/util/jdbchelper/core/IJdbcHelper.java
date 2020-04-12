@@ -22,7 +22,7 @@ public interface IJdbcHelper {
     <T> List<T> query(String sql, Class<T> tClass, Object... objs);
 
     /**
-     *
+     *条件查询
      * @param sql 查询所有的sql
      * @param tClass 要封装的类
      * @param condition 封装条件的map
@@ -31,11 +31,32 @@ public interface IJdbcHelper {
      */
     <T> List<T> queryByCondition(String sql, Class<T> tClass, Map<String,?> condition);
     /**
+     *条件排序查询
+     * @param sql 查询所有的sql
+     * @param tClass 要封装的类
+     * @param condition 封装条件的map
+     * @param order 排序策略 false 降序 true升序
+     * @param <T>
+     * @return
+     */
+    <T> List<T> queryByCondition(String sql, Class<T> tClass, Map<String,?> condition,Map<String,Boolean> order);
+
+    /**
+     * 查找聚合函数，或某一条记录的某一字段。不能应用于封装实体类
+     * @param sql 查询语句
+     * @param tClass 要返回的类的Class对象
+     * @param <T> 泛型
+     * @return 返回值
+     */
+    <T> T queryAsObject(String sql,Class<T> tClass,Object ... objs);
+
+    /**
      * 增删改方法
      * @param sql
      * @param objs
+     * @return 影响的行数
      */
-    void update(String sql, Object... objs);
+    int update(String sql, Object... objs);
 
     /**
      * 关闭连接

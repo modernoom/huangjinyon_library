@@ -16,7 +16,11 @@ import java.util.Map;
  * @author huangjinyong
  */
 public class JdbcHelper implements IJdbcHelper{
-    private DataBasePool pool= DataBasePoolFactory.getPool();
+    private DataBasePool pool =DataBasePoolFactory.getPool();
+
+
+
+
     private Connection connection;
 
 
@@ -64,16 +68,45 @@ public class JdbcHelper implements IJdbcHelper{
 
     @Override
     public <T> List<T> queryByCondition(String sql, Class<T> tClass, Map<String, ?> condition) {
-        String conditoinSql = ConditionSqlCreator.getConditionSql(sql,condition);
+        String conditionSql = ConditionSqlCreator.getConditionSql(sql,condition);
         Object[] conditionVal = ConditionSqlCreator.getConditionVal(condition);
-        return query(conditoinSql,tClass,conditionVal);
+        return query(conditionSql,tClass,conditionVal);
     }
 
     @Override
-    public void update(String sql, Object... objs) {
+    public <T> List<T> queryByCondition(String sql, Class<T> tClass, Map<String, ?> condition, Map<String, Boolean> order) {
+        String conditionSql = ConditionSqlCreator.getConditionSql(sql,condition,order);
+        Object[] conditionVal = ConditionSqlCreator.getConditionVal(condition);
+        return query(conditionSql,tClass,conditionVal);
+    }
+
+    @Override
+    public <T> T queryAsObject(String sql, Class<T> tClass,Object...objs) {
+        T result;
+        try {
+            PreparedStatement ps = getPreparedStatement(sql, objs);
+            ResultSet resultSet = ps.executeQuery();
+            if(resultSet.next()){
+                Object obj= resultSet.getObject(1);
+                if(tClass.isInstance(obj)){
+                    result= tClass.cast(obj);
+                }else {
+                    throw new RuntimeException("查询结果类型不匹配");
+                }
+                return result;
+            }
+            return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public int update(String sql, Object... objs) {
         try {
             PreparedStatement preparedStatement = getPreparedStatement(sql, objs);
-            preparedStatement.executeUpdate();
+            return preparedStatement.executeUpdate();
         }catch (SQLException e) {
             e.printStackTrace();
         }finally {
@@ -83,6 +116,7 @@ public class JdbcHelper implements IJdbcHelper{
                 e.printStackTrace();
             }
         }
+        return 0;
     }
 
     @Override
@@ -155,6 +189,7 @@ public class JdbcHelper implements IJdbcHelper{
         for (int i = 1; i <=objs.length ; i++) {
             preparedStatement.setObject(i,objs[i-1]);
         }
+
         System.out.println(preparedStatement);
         return preparedStatement;
     }

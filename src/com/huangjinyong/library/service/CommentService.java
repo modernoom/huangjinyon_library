@@ -25,4 +25,10 @@ public interface CommentService {
      * @return comment
      */
     List<Comment> findByCondition(Map map);
+
+    /**
+     * 保存评论
+     * @param comment 评论
+     */
+    void save(Comment comment);
 }

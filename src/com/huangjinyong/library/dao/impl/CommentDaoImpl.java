@@ -17,4 +17,10 @@ public class CommentDaoImpl implements CommentDao {
     public List<Comment> findAll(Map<String, ?> map) {
         return jdbcHelper.queryByCondition("select * from comment",Comment.class,map);
     }
+
+    @Override
+    public void save(Comment comment) {
+        String sql="insert into comment(student_name,seat_id,context) values(?,?,?)";
+        jdbcHelper.update(sql,comment.getStudentName(),comment.getSeatId(),comment.getContext());
+    }
 }

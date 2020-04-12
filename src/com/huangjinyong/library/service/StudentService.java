@@ -3,7 +3,6 @@ package com.huangjinyong.library.service;
 import com.huangjinyong.library.entity.Student;
 import com.huangjinyong.library.util.jdbchelper.page.PageBean;
 
-import java.util.List;
 
 /**
  * @author huangjinyong
@@ -31,4 +30,18 @@ public interface StudentService {
      * @return  students
      */
     PageBean<Student> findByPage(Integer currentPage, Integer pageSize);
+
+    /**
+     * 当前用户是否存在未完成预约
+     * @param student 用户
+     * @return true->存在
+     */
+    boolean haveUnDone(Student student);
+
+    /**
+     * 更新用户状态
+     * @param student 用户
+     * @return
+     */
+    boolean updateStatus(Student student);
 }
